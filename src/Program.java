@@ -1,5 +1,9 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import static java.lang.System.out;
 
 public class Program {
@@ -9,16 +13,17 @@ public class Program {
         for(int i = 0; i < output.length;i++)
             out.println(output[i]);*/
 
-        //String test1 = "Sup";
-        String test2 = "123";
-        /*String test3 = "Sup123";
+        List<String> strings = new ArrayList<>();
+        strings.add("A");
+        strings.add("B");
+        strings.add("123");
+        strings.add("34565");
+        strings.add("7654");
 
-        out.println(isNumber(test1));
-        out.println(isNumber(test2));
-        out.println(isNumber(test3));*/
-        out.println(toInt(test2));
+        checkInts(strings);
     }
 
+    // 1.2.a
     public static boolean isNumber(String s) {
         for(int i = 0; i < s.length(); i++) {
             if(s.charAt(i) < 48 || s.charAt(i) > 57)
@@ -27,6 +32,7 @@ public class Program {
         return true;
     }
 
+    // 1.2.b
     public static int toInt(String s) {
         int aux = 0;
         int result = 0;
@@ -41,4 +47,50 @@ public class Program {
         return result;
     }
 
+    // 1.2.c
+    public static void checkInts(List<String> strings) {
+        int somatorio = 0;
+        int countPos = 0;
+        int countNeg = 0;
+
+        String textInicial = "";
+
+        for (String s : strings) {
+            textInicial += " " + s;
+
+            if(isNumber(s)) {
+                countPos++;
+            } else {
+                countNeg++;
+            }
+
+            somatorio += toInt(s);
+        }
+
+        out.println("java CheckIntegers " + textInicial);
+        out.println("Encontrei " + countPos + " inteiros");
+        out.println("Encontrei " + countNeg + " termos não inteiros");
+        out.println("Somatorio dos inteiros: " + somatorio);
+    }
+
+    //1.3
+    public static void filterWords(List<String> strings) {
+        Scanner scanner = new Scanner(System.in);
+        String frase = "";
+        String keyWords = "";
+
+        for(String s : strings) {
+            keyWords += "" + s;
+        }
+
+        out.println("java FilterWords " + keyWords);
+
+        do {
+            frase = scanner.nextLine();
+            out.println("frase: " + frase);
+        }
+        while (!scanner.nextLine().equals(""));
+
+        scanner.close();
+    }
 }
