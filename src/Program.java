@@ -29,14 +29,16 @@ public class Program {
 
     public static int toInt(String s) {
         int aux = 0;
+        int result = 0;
         if (isNumber(s)) {
-            int casa = 1;
+            int multiplier = 1;
             for (int i = s.length() - 1; i >= 0; i--) {
-                aux = s.charAt(i) - 48 * casa;
-                casa *= 10;
+                aux = s.charAt(i) - 48 * multiplier;
+                result += aux;
+                multiplier *= 10;
             }
         }
-        return aux;
+        return result;
     }
 
 }
