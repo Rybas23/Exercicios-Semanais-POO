@@ -1,12 +1,11 @@
-package src;
+package M1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.*;
 
 import static java.lang.System.out;
 
-public class Program {
+public class Main {
 
     public static void main(String[] args) {
         /*String[] output = {"0","2","3"};
@@ -21,6 +20,21 @@ public class Program {
         strings.add("7654");
 
         checkInts(strings);
+
+        out.println(" ");
+
+        List<String> strings2 = new ArrayList<>();
+        strings2.add("Olá");
+        strings2.add("Juro");
+        strings2.add("batata");
+
+        //filterWords(strings2);
+
+        List<String> strings3 = new ArrayList<>();
+        strings3.add("teste");
+        strings3.add("batata");
+
+        characterCount(strings3);
     }
 
     // 1.2.a
@@ -76,21 +90,58 @@ public class Program {
     //1.3
     public static void filterWords(List<String> strings) {
         Scanner scanner = new Scanner(System.in);
-        String frase = "";
-        String keyWords = "";
+        String frase = " ";
+        String newString;
+        boolean phraseFlag = false;
 
-        for(String s : strings) {
-            keyWords += "" + s;
-        }
-
-        out.println("java FilterWords " + keyWords);
+        out.println("java FilterWords " + strings);
 
         do {
+            newString = "";
             frase = scanner.nextLine();
+
+            if(frase.equals("")) {
+                break;
+            }
+
             out.println("frase: " + frase);
-        }
-        while (!scanner.nextLine().equals(""));
+
+            for (String word : frase.split(" ")) {
+                for (String keyWord : strings) {
+                    if (word.equals(keyWord)) {
+                        phraseFlag = true;
+                        break;
+                    }
+                }
+
+                if (!phraseFlag) {
+                    newString += word + " ";
+                }
+
+                phraseFlag = false;
+            }
+
+            out.println("filtrada: " + newString);
+            out.println(" ");
+        } while (!frase.equals(""));
 
         scanner.close();
+    }
+
+    //1.4
+    public static void characterCount(List<String> strings) {
+        CharacterData characterData = new CharacterData();
+        out.println("java CharacterStats " + strings);
+
+        for (String s : strings) {
+            characterData.addWord(s);
+        }
+
+        for (Map.Entry<Character, Integer> character : characterData.characterCount.entrySet()) {
+            double percentage = ((double) character.getValue() / (double) characterData.getTotal()) * 100;
+            DecimalFormat df = new DecimalFormat("####0.00");
+
+            System.out.println(character.getKey() + ": " + character.getValue() + " (" + df.format(percentage) + "%)");
+        }
     }
 }
