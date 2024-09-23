@@ -1,10 +1,10 @@
-package M1;
+package src.M1;
 
 import java.util.*;
 
 import static java.lang.System.out;
 
-public class Main {
+public class MainM1 {
 
     public static void main(String[] args) {
         /*String[] output = {"0","2","3"};

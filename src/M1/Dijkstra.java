@@ -1,4 +1,4 @@
-package M1;
+package src.M1;
 
 import java.util.*;
 
@@ -17,8 +17,8 @@ public class Dijkstra {
 
     public void execute() {
         for(String s : expression) {
-            if(Main.isInteger(s)) {
-                val.push(Main.toInt(s));
+            if(MainM1.isInteger(s)) {
+                val.push(MainM1.toInt(s));
             } else if(isOp(s)) {
                 op.push(s);
             } else if(s.equals(")")) {
