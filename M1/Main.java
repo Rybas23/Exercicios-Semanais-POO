@@ -1,6 +1,5 @@
 package M1;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -34,11 +33,32 @@ public class Main {
         strings3.add("teste");
         strings3.add("batata");
 
-        characterCount(strings3);
+        //characterCount(strings3);
+
+        List<String> strings4 = new ArrayList<>();
+        strings4.add("(");
+        strings4.add("1");
+        strings4.add("+");
+        strings4.add("(");
+        strings4.add("(");
+        strings4.add("2");
+        strings4.add("+");
+        strings4.add("3");
+        strings4.add(")");
+        strings4.add("x");
+        strings4.add("(");
+        strings4.add("4");
+        strings4.add("x");
+        strings4.add("5");
+        strings4.add(")");
+        strings4.add(")");
+        strings4.add(")");
+
+        expressionEvaluator(strings4);
     }
 
     // 1.2.a
-    public static boolean isNumber(String s) {
+    public static boolean isInteger(String s) {
         for(int i = 0; i < s.length(); i++) {
             if(s.charAt(i) < 48 || s.charAt(i) > 57)
                 return false;
@@ -50,7 +70,7 @@ public class Main {
     public static int toInt(String s) {
         int aux = 0;
         int result = 0;
-        if (isNumber(s)) {
+        if (isInteger(s)) {
             int multiplier = 1;
             for (int i = s.length() - 1; i >= 0; i--) {
                 aux = (s.charAt(i) - 48) * multiplier;
@@ -72,7 +92,7 @@ public class Main {
         for (String s : strings) {
             textInicial += " " + s;
 
-            if(isNumber(s)) {
+            if(isInteger(s)) {
                 countPos++;
             } else {
                 countNeg++;
@@ -139,9 +159,19 @@ public class Main {
 
         for (Map.Entry<Character, Integer> character : characterData.characterCount.entrySet()) {
             double percentage = ((double) character.getValue() / (double) characterData.getTotal()) * 100;
-            DecimalFormat df = new DecimalFormat("####0.00");
 
-            System.out.println(character.getKey() + ": " + character.getValue() + " (" + df.format(percentage) + "%)");
+            System.out.println(character.getKey() + ": " + character.getValue() + " (" + percentage + "%)");
         }
     }
+
+    // 1.5
+    public static void expressionEvaluator(List<String> strings) {
+        out.println("java ExpressionEvaluator " + strings);
+        
+        Dijkstra d = new Dijkstra(strings);
+
+        d.execute();
+        System.out.println(d.result());
+    }
+
 }
