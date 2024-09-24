@@ -68,31 +68,39 @@ public class Disciplina {
 
     // Verifica se é possivel inscrever o aluno na disciplina, se for inscreve
     public void inscrever(Aluno aluno) {
-        // Valida se ainda existem vagas na disciplina
-        if(this.inscricoes.size() < capacidade) {
-            // Instância uma nova inscrição
-            Inscricao inscricao = new Inscricao(Settings.semNota, aluno);
+        try {
+            // Valida se ainda existem vagas na disciplina
+            if(this.inscricoes.size() < capacidade) {
+                // Instância uma nova inscrição
+                Inscricao inscricao = new Inscricao(Settings.semNota, aluno);
 
-            // Adiciona a nova inscrição à lista
-            this.inscricoes.add(inscricao);
+                // Adiciona a nova inscrição à lista
+                this.inscricoes.add(inscricao);
+            }
+        } catch  (Exception e) {
+            String errorMessage = e.getMessage();
         }
     }
 
     // Método auxiliar para procurar o aluno desejado na lista de Inscrições
     private int getAlunoInscricoes(Aluno aluno) {
-        // Instância uma variavel auxiliar para guardar o index da inscrição
-        int index = 0;
+        try {
+            // Instância uma variavel auxiliar para guardar o index da inscrição
+            int index = 0;
 
-        // Percorre a lista de inscrições
-        for (Inscricao inscricao : inscricoes) {
-            // Verifica se o aluno existe neste index da lista
-            if (inscricao.getAluno().equals(aluno)) {
-                // retorna o aluno encontrado
-                return index;
+            // Percorre a lista de inscrições
+            for (Inscricao inscricao : inscricoes) {
+                // Verifica se o aluno existe neste index da lista
+                if (inscricao.getAluno().equals(aluno)) {
+                    // retorna o aluno encontrado
+                    return index;
+                }
+
+                // Incrementa +1 no index de inscrições
+                index++;
             }
-
-            // Incrementa +1 no index de inscrições
-            index++;
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
         // Retorna -1 (inscrição não encontrada)
@@ -100,34 +108,42 @@ public class Disciplina {
     }
 
     public void desinscrever(Aluno aluno) {
-        // Valida se existem inscrições e se o aluno está inscrito
-        if(!this.inscricoes.isEmpty()) {
-            // Recebe o index da inscrição do aluno
-            int index = getAlunoInscricoes(aluno);
+        try {
+            // Valida se existem inscrições e se o aluno está inscrito
+            if(!this.inscricoes.isEmpty()) {
+                // Recebe o index da inscrição do aluno
+                int index = getAlunoInscricoes(aluno);
 
-            // Valida se o index é maior de -1, ou seja, se existe
-            if(index > -1) {
-                // Remove a inscrição do aluno
-                this.inscricoes.remove(index);
+                // Valida se o index é maior de -1, ou seja, se existe
+                if(index > -1) {
+                    // Remove a inscrição do aluno
+                    this.inscricoes.remove(index);
+                }
             }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
     }
 
     // Método auxiliar para procurar o aluno desejado na lista de Inscrições a partir do seu numero
     private int getAlunoInscricoesByNumber(int numeroAluno) {
-        // Instância uma variavel auxiliar para guardar o index da inscrição
-        int index = 0;
+        try {
+            // Instância uma variavel auxiliar para guardar o index da inscrição
+            int index = 0;
 
-        // Percorre a lista de inscrições
-        for (Inscricao inscricao : inscricoes) {
-            // Verifica se o aluno existe neste index da lista
-            if (inscricao.getAluno().getNumero() == numeroAluno) {
-                // retorna o aluno encontrado
-                return index;
+            // Percorre a lista de inscrições
+            for (Inscricao inscricao : inscricoes) {
+                // Verifica se o aluno existe neste index da lista
+                if (inscricao.getAluno().getNumero() == numeroAluno) {
+                    // retorna o aluno encontrado
+                    return index;
+                }
+
+                // Incrementa +1 no index de inscrições
+                index++;
             }
-
-            // Incrementa +1 no index de inscrições
-            index++;
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
         // Retorna -1 (inscrição não encontrada)
@@ -136,28 +152,36 @@ public class Disciplina {
 
     // lanca a nota a um aluno caso a nota seja valida, e caso a inscrição exista
     public void lancarNota(int nota, int numeroAluno) {
-        // Valida se a nota é válida
-        if((nota >= 0 && nota <= 20)) {
-            // Recebe o index da inscrição do aluno
-            int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
+        try {
+            // Valida se a nota é válida
+            if((nota >= 0 && nota <= 20)) {
+                // Recebe o index da inscrição do aluno
+                int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
 
-            // Valida se a inscrição do aluno existe
-            if(indexInscricao > -1) {
-                // Define a nota do aluno
-                this.inscricoes.get(indexInscricao).setNota(nota);
+                // Valida se a inscrição do aluno existe
+                if(indexInscricao > -1) {
+                    // Define a nota do aluno
+                    this.inscricoes.get(indexInscricao).setNota(nota);
+                }
             }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
     }
 
     // Verifica se o aluno tem nota
     public boolean temNota(int numeroAluno) {
-        // Recebe o index da inscrição do aluno
-        int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
+        try {
+            // Recebe o index da inscrição do aluno
+            int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
 
-        // Valida se a inscrição do aluno existe
-        if(indexInscricao > -1) {
-            // Retorna true ou false, dependendo se o aluno tem nota ou não
-            return this.inscricoes.get(indexInscricao).temNota();
+            // Valida se a inscrição do aluno existe
+            if(indexInscricao > -1) {
+                // Retorna true ou false, dependendo se o aluno tem nota ou não
+                return this.inscricoes.get(indexInscricao).temNota();
+            }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
         // Retorna false
@@ -166,13 +190,17 @@ public class Disciplina {
 
     // Retorna a nota do aluno
     public int obterNota(int numeroAluno) {
-        // Recebe o index da inscrição do aluno
-        int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
+        try {
+            // Recebe o index da inscrição do aluno
+            int indexInscricao = getAlunoInscricoesByNumber(numeroAluno);
 
-        // Valida se a inscrição do aluno existe
-        if(indexInscricao > -1) {
-            // Retorna true ou false, dependendo se o aluno tem nota ou não
-            return this.inscricoes.get(indexInscricao).getNota();
+            // Valida se a inscrição do aluno existe
+            if(indexInscricao > -1) {
+                // Retorna true ou false, dependendo se o aluno tem nota ou não
+                return this.inscricoes.get(indexInscricao).getNota();
+            }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
         // Retorna a constante semNota (-1)
@@ -181,26 +209,32 @@ public class Disciplina {
 
     // Calcula e retorna a média das notas atribuidas
     public double notaMedia() {
-        // Variavel que vai guardar o total da soma das notas
-        double somaNotas = 0;
+        try {
+            // Variavel que vai guardar o total da soma das notas
+            double somaNotas = 0;
 
-        // Variavel auxiliar para guardar a quantiadade de notas não atribuidas
-        int notasNaoAtribuidasCount = 0;
+            // Variavel auxiliar para guardar a quantiadade de notas não atribuidas
+            int notasNaoAtribuidasCount = 0;
 
-        // Percorre a lista de inscrições
-        for (Inscricao inscricao : inscricoes) {
-            // Verifica se o aluno tem uma nota atribuida
-            if(inscricao.getNota() != Settings.semNota) {
-                // Soma a nota do aluno à soma das notas
-                somaNotas += inscricao.getNota();
-            } else {
-                // Incrementa +1 nas notas não atribuidas
-                notasNaoAtribuidasCount++;
+            // Percorre a lista de inscrições
+            for (Inscricao inscricao : inscricoes) {
+                // Verifica se o aluno tem uma nota atribuida
+                if(inscricao.getNota() != Settings.semNota) {
+                    // Soma a nota do aluno à soma das notas
+                    somaNotas += inscricao.getNota();
+                } else {
+                    // Incrementa +1 nas notas não atribuidas
+                    notasNaoAtribuidasCount++;
+                }
             }
+
+            // Calcula e retorna a média das notas atribuidas
+            return somaNotas / (this.inscricoes.size() - notasNaoAtribuidasCount);
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
-        // Calcula e retorna a média das notas atribuidas
-        return somaNotas / (this.inscricoes.size() - notasNaoAtribuidasCount);
+        return 0;
     }
 
     // Constroi uma lista com as 3 melhores notas da disciplina
@@ -208,19 +242,23 @@ public class Disciplina {
         // Instância uma nova lista que irá conter os melhores alunos da disciplina
         ArrayList<Aluno> melhoresAlunos = new ArrayList<>();
 
-        // Verifica se existem alunos inscritos na disciplina
-        if (!this.inscricoes.isEmpty()) {
-            // Organiza a lista de inscrições por nota
-            this.inscricoes.sort(Inscricao::compareTo);
+        try {
+            // Verifica se existem alunos inscritos na disciplina
+            if (!this.inscricoes.isEmpty()) {
+                // Organiza a lista de inscrições por nota
+                this.inscricoes.sort(Inscricao::compareTo);
 
-            // Vai passar por cada incrição até chegar ao top 3
-            for (int index = 0; index < 3; index++) {
-                // Verifica se o aluno tem nota
-                if(this.inscricoes.get(index).temNota()) {
-                    // Preenche a lista dos melhores alunos com o top 3 das melhores notas
-                    melhoresAlunos.add(this.inscricoes.get(index).getAluno());
+                // Vai passar por cada incrição até chegar ao top 3
+                for (int index = 0; index < 3; index++) {
+                    // Verifica se o aluno tem nota
+                    if(this.inscricoes.get(index).temNota()) {
+                        // Preenche a lista dos melhores alunos com o top 3 das melhores notas
+                        melhoresAlunos.add(this.inscricoes.get(index).getAluno());
+                    }
                 }
             }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
 
         // Retorna a lista de alunos
@@ -229,40 +267,44 @@ public class Disciplina {
 
     // Mostra todos os dados sobre a disciplina
     public void dadosDisciplina() {
-        out.println("Disciplina:");
-        out.println(" ");
-        out.println("Sigla: " + this.sigla);
-        out.println("Capacidade: " + this.capacidade);
-        out.println(" ");
-        out.println("Inscrições: ");
+        try {
+            out.println("Disciplina:");
+            out.println(" ");
+            out.println("Sigla: " + this.sigla);
+            out.println("Capacidade: " + this.capacidade);
+            out.println(" ");
+            out.println("Inscrições: ");
 
-        // Verifica se a lista tem registos
-        if(!this.inscricoes.isEmpty()) {
-            // Percorre cada registo da lista
-            for (Inscricao inscricao : inscricoes) {
-                // Verifica se o aluno tem nota
-                String nota = (inscricao.temNota()) ? String.valueOf(inscricao.getNota()) : "NA";
+            // Verifica se a lista tem registos
+            if(!this.inscricoes.isEmpty()) {
+                // Percorre cada registo da lista
+                for (Inscricao inscricao : inscricoes) {
+                    // Verifica se o aluno tem nota
+                    String nota = (inscricao.temNota()) ? String.valueOf(inscricao.getNota()) : "NA";
 
-                out.println("- Aluno: Nº " + inscricao.getAluno().getNumero() + " | Nome: " + inscricao.getAluno().getNome());
-                out.println("- Nota: " + nota);
-                out.println(" ");
+                    out.println("- Aluno: Nº " + inscricao.getAluno().getNumero() + " | Nome: " + inscricao.getAluno().getNome());
+                    out.println("- Nota: " + nota);
+                    out.println(" ");
+                }
             }
-        }
 
-        out.println("Média: " + notaMedia());
-        out.println(" ");
-        out.println("Melhores Alunos: ");
+            out.println("Média: " + notaMedia());
+            out.println(" ");
+            out.println("Melhores Alunos: ");
 
-        // Raecebe a lista com os melhores alunos
-        ArrayList<Aluno> melhoresAlunos = melhoresAlunos();
+            // Raecebe a lista com os melhores alunos
+            ArrayList<Aluno> melhoresAlunos = melhoresAlunos();
 
-        // Verifica se a lista tem registos
-        if(!melhoresAlunos.isEmpty()) {
-            // Percorre cada registo da lista
-            for (Aluno aluno : melhoresAlunos) {
-                out.println("- Aluno: Nº " + aluno.getNumero() + " | Nome: " + aluno.getNome());
-                out.println(" ");
+            // Verifica se a lista tem registos
+            if(!melhoresAlunos.isEmpty()) {
+                // Percorre cada registo da lista
+                for (Aluno aluno : melhoresAlunos) {
+                    out.println("- Aluno: Nº " + aluno.getNumero() + " | Nome: " + aluno.getNome());
+                    out.println(" ");
+                }
             }
+        } catch (Exception e) {
+            String errorMessage = e.getMessage();
         }
     }
 
