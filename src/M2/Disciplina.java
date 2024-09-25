@@ -47,22 +47,6 @@ public class Disciplina {
 
     //region Getters & Setters
 
-    public String getSigla() {
-        return sigla;
-    }
-
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
-    }
-
-    public int getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
-    }
-
     public ArrayList<Inscricao> getInscricoes() {
         return inscricoes;
     }

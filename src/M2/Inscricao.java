@@ -36,10 +36,6 @@ public class Inscricao implements Comparable<Inscricao> {
         return aluno;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
-
     //endregion
 
     //region Métodos

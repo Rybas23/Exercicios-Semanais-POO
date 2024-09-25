@@ -46,10 +46,6 @@ public class Aluno {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     //endregion
 
     //region Métodos
@@ -105,8 +101,6 @@ public class Aluno {
             // Return de null visto que houve exceção
             return null;
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
 
             // Return de null visto que houve exceção
