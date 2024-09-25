@@ -366,8 +366,6 @@ public class Disciplina {
      */
     private static String determinarSigla(String nomeDisciplina) {
         switch (nomeDisciplina) {
-            case "Programação Orientada a Objetos":
-                return "POO";
             case "Bases de Dados":
                 return "BD";
             case "Probabilidades e Processos Estocásticos":
@@ -376,10 +374,9 @@ public class Disciplina {
                 return "TC";
             case "Tópicos de Matemática para Computação":
                 return "TMC";
+            default:
+                return "POO";
         }
-
-        // retorna null caso a disciplina não exista
-        return null;
     }
 
     /**
@@ -431,8 +428,6 @@ public class Disciplina {
      */
     private static String determinarNome(String siglaDisciplina) {
         switch (siglaDisciplina) {
-            case "POO":
-                return "Programação Orientada a Objetos";
             case "BDs":
                 return "Bases de Dado";
             case "PPE":
@@ -441,17 +436,16 @@ public class Disciplina {
                 return "Teoria da Computação";
             case "TMC":
                 return "Tópicos de Matemática para Computação";
+            default:
+                return "Programação Orientada a Objetos";
         }
-
-        // retorna null caso a disciplina não exista
-        return null;
     }
 
     /**
      * Lê o ficheiro que o utilizador escolher e escreve o seu conteudo, neste caso os varios alunos, na lista alunos
      * @return
      */
-    private static Disciplina lerDisciplinaFicheiro() {
+    private static Disciplina lerDisciplinaFicheiro(ArrayList<Inscricao> inscricoes) {
         try {
             // Instância uma nova String que irá guardar a sigla da Disciplina
             String siglaDisciplina = "";
@@ -489,12 +483,30 @@ public class Disciplina {
                     capacidade = Integer.parseInt(line);
                 }
 
+                // Verifica se o ficheiro tem mais do que 2 linhas e se a lista de inscrições tem valores
+                if(lineIndex > 1 && !inscricoes.isEmpty()) {
+                    // Separa o numero do aluno da string com o conteudo da linha
+                    String numero = line.substring(0, line.indexOf(" "));
+
+                    // Separa o nome do aluno da string com o conteudo da linha
+                    String nota = line.substring(line.indexOf(" ") + 1);
+
+                    // Percorre cada inscrição
+                    for (Inscricao inscricao : inscricoes) {
+                        // Verifica se o numero do aluno está no ficheiro e se tem nota
+                        if(inscricao.getAluno().getNumero() == Integer.parseInt(numero) && !nota.equals("NA")) {
+                            // Define a nota do aluno a partir da nota que está no ficheiro
+                            inscricao.setNota(Integer.valueOf(nota));
+                        }
+                    }
+                }
+
                 // Avança no index da linha
                 lineIndex++;
             }
 
             // Instância uma nova disciplina a partir dos dados obtidos do ficheiro
-            Disciplina disciplina = new Disciplina(siglaDisciplina, capacidade);
+            Disciplina disciplina = new Disciplina(siglaDisciplina, capacidade, inscricoes);
 
             // Fecha o scanner que está a ler o ficheiro
             scanner.close();
@@ -553,11 +565,14 @@ public class Disciplina {
      */
     public static Disciplina criarDisciplina2Ficheiros() {
         try {
+            // Cria a lista de inscrições
+            ArrayList<Inscricao> inscricoes = autoInscreverAlunos();
+
             // Cria a disciplina
-            Disciplina disciplina = lerDisciplinaFicheiro();
+            Disciplina disciplina = lerDisciplinaFicheiro(inscricoes);
 
             // Preenche a lista de inscrições da disciplina
-            disciplina.setInscricoes(autoInscreverAlunos());
+            disciplina.setInscricoes(inscricoes);
 
             // Retorna a disciplina
             return disciplina;

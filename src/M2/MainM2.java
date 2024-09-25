@@ -54,7 +54,7 @@ public class MainM2 {
         // Lê a lista alunos de um ficheiro e escreve os dados na consola
         dadosAlunos();
 
-        /**Disciplina disciplina2 = Disciplina.criarDisciplinaAutoInscricao("Programação Orientada a Objetos", 10);
+        Disciplina disciplina2 = Disciplina.criarDisciplinaAutoInscricao("Programação Orientada a Objetos", 10);
 
         for(Inscricao inscricao : disciplina2.getInscricoes()) {
             if(inscricao.getAluno().getNumero() == 2) {
@@ -78,7 +78,7 @@ public class MainM2 {
         Disciplina disciplina3 = Disciplina.criarDisciplina2Ficheiros();
 
         // Dados Discilina
-        disciplina3.dadosDisciplina();**/
+        disciplina3.dadosDisciplina();
 
         out.println(" ");
         out.println("TESTE 4:");
