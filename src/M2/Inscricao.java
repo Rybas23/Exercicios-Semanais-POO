@@ -3,7 +3,6 @@ package src.M2;
 public class Inscricao implements Comparable<Inscricao> {
     //region Atributos
 
-    private final int id;
     private int nota;
     private Aluno aluno;
 
@@ -11,14 +10,12 @@ public class Inscricao implements Comparable<Inscricao> {
 
     //region Construtores
 
-    // Construtor base
-    public Inscricao() {
-        this.id = Settings.getInscricaoId();
-    }
-
-    // Construtor Completo
+    /**
+     * Construtor Completo
+     * @param nota
+     * @param aluno
+     */
     public Inscricao(int nota, Aluno aluno) {
-        this.id = Settings.getInscricaoId();
         this.nota = nota;
         this.aluno = aluno;
     }
@@ -26,10 +23,6 @@ public class Inscricao implements Comparable<Inscricao> {
     //endregion
 
     //region Getters & Setters
-
-    public int getId() {
-        return id;
-    }
 
     public int getNota() {
         return nota;
@@ -51,7 +44,10 @@ public class Inscricao implements Comparable<Inscricao> {
 
     //region Métodos
 
-    // Valida se o aluno tem nota
+    /**
+     * Valida se o aluno tem nota
+     * @return
+     */
     public boolean temNota() {
         return this.nota != Settings.semNota;
     }
@@ -60,6 +56,11 @@ public class Inscricao implements Comparable<Inscricao> {
 
     //region Comparator
 
+    /**
+     * Override do método compareTo para organizar a lista de inscrições pela nota mais alta
+     * @param otherInscricao the object to be compared.
+     * @return
+     */
     @Override
     public int compareTo(Inscricao otherInscricao) {
         return Integer.compare(otherInscricao.getNota(), getNota());
