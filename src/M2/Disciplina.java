@@ -90,8 +90,6 @@ public class Disciplina {
                 this.inscricoes.add(inscricao);
             }
         } catch  (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
     }
@@ -118,8 +116,6 @@ public class Disciplina {
                 index++;
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -145,8 +141,6 @@ public class Disciplina {
                 }
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
     }
@@ -173,8 +167,6 @@ public class Disciplina {
                 index++;
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -201,8 +193,6 @@ public class Disciplina {
                 }
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
     }
@@ -223,8 +213,6 @@ public class Disciplina {
                 return this.inscricoes.get(indexInscricao).temNota();
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -248,8 +236,6 @@ public class Disciplina {
                 return this.inscricoes.get(indexInscricao).getNota();
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -290,8 +276,6 @@ public class Disciplina {
                 return Settings.semNotaString;
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
 
             // Retorna "NA" caso ocorra algum erro
@@ -323,8 +307,6 @@ public class Disciplina {
                 }
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -373,8 +355,6 @@ public class Disciplina {
                 }
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
     }
@@ -420,8 +400,6 @@ public class Disciplina {
                 inscricoes.add(new Inscricao(Settings.semNota, aluno));
             }
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
         }
 
@@ -439,8 +417,6 @@ public class Disciplina {
             // Cria e retorna a disciplina
             return new Disciplina(determinarSigla(nomeDisciplina), capacidade, autoInscreverAlunos());
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
 
             // Retorna null visto que ocorreu um erro
@@ -531,8 +507,6 @@ public class Disciplina {
             // Return de null visto que houve exceção
             return null;
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
 
             // Return de null visto que houve exceção
@@ -588,8 +562,6 @@ public class Disciplina {
             // Retorna a disciplina
             return disciplina;
         } catch (Exception e) {
-            String errorMessage = e.getMessage();
-
             System.err.println("Ocorreu um erro!");
 
             // Retorna null visto que ocorreu um erro

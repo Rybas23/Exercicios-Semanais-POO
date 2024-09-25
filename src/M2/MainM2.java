@@ -49,12 +49,12 @@ public class MainM2 {
         // Dados Discilina
         disciplina.dadosDisciplina();
 
-        /**out.println("TESTE 2:");
+        out.println("TESTE 2:");
 
         // Lê a lista alunos de um ficheiro e escreve os dados na consola
         dadosAlunos();
 
-        Disciplina disciplina2 = Disciplina.criarDisciplinaAutoInscricao("Programação Orientada a Objetos", 10);
+        /**Disciplina disciplina2 = Disciplina.criarDisciplinaAutoInscricao("Programação Orientada a Objetos", 10);
 
         for(Inscricao inscricao : disciplina2.getInscricoes()) {
             if(inscricao.getAluno().getNumero() == 2) {
@@ -80,17 +80,21 @@ public class MainM2 {
         // Dados Discilina
         disciplina3.dadosDisciplina();**/
 
+        out.println(" ");
         out.println("TESTE 4:");
 
+        // Instância um novo File que irá conter a localização da pasta principal
+        File dir = new File(System.getProperty("user.dir") + "/AN/");
+
         // Chama a função que imprime na consola os ficheiros de uma pasta
-        printCollectFilesDir(new File(System.getProperty("user.dir") + "/AN/"));
+        printCollectFilesDir(dir);
 
         out.println(" ");
         out.println("TESTE 5:");
 
         // Chama a função que preenche uma lista com os ficheiros de uma pasta e com os ficheiros das sub-pastas
         try {
-            printCollectedFiles();
+            printCollectedFiles(dir);
         } catch (IOException e) {
             err.println("Ocorreu um erro!");
         }
@@ -98,14 +102,18 @@ public class MainM2 {
 
     // Imprime os dados dos alunos presentes no ficheiro
     public static void dadosAlunos() {
-        // Instância uma nova lista de alunos que irá conter os alunos presentes no ficheiro selecionado
-        ArrayList<Aluno> alunos = Aluno.lerAlunoFicheiro();
+        try {
+            // Instância uma nova lista de alunos que irá conter os alunos presentes no ficheiro selecionado
+            ArrayList<Aluno> alunos = Aluno.lerAlunoFicheiro();
 
-        System.out.println("Alunos:");
+            System.out.println("Alunos:");
 
-        // Percorre cada aluno da lista
-        for (Aluno aluno : alunos) {
-            out.println("- Aluno: Nº " + aluno.getNumero() + " | Nome: " + aluno.getNome());
+            // Percorre cada aluno da lista
+            for (Aluno aluno : alunos) {
+                out.println("- Aluno: Nº " + aluno.getNumero() + " | Nome: " + aluno.getNome());
+            }
+        } catch (Exception e) {
+            err.println("Ocorreu um erro!");
         }
     }
 
@@ -131,7 +139,9 @@ public class MainM2 {
             if(files != null) {
                 // Passa por cada ficheiro
                 for (File file : files) {
-                    out.println(file.getPath());
+                    // Guarda o falor do path do ficheiro numa variavel
+                    String filePath = file.getPath();
+                    out.println(filePath.substring(filePath.indexOf("\\" + dir.getName())));
                 }
             }
         } catch (Exception e) {
@@ -153,11 +163,16 @@ public class MainM2 {
             if(files != null) {
                 // Passa por cada ficheiro
                 for (File file : files) {
-                    // Adiciona o ficheiro à lista de ficheiros
-                    list.add(file);
-
-                    // Volta a chamar a função de forma recursiva
-                    collectFilesRec(file, list);
+                    // Verifica se o ficheiro é um diretorio, caso seja volta a chamar
+                    // a função de forma recursiva, com o diretorio no parametro de entrado
+                    // se não adiciona o ficheiro à lista
+                    if(file.isDirectory()) {
+                        // Volta a chamar a função de forma recursiva
+                        collectFilesRec(file, list);
+                    } else {
+                        // Adiciona o ficheiro à lista de ficheiros
+                        list.add(file);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -185,10 +200,7 @@ public class MainM2 {
         return list;
     }
 
-    public static void printCollectedFiles() throws IOException {
-        // Instância um novo File que irá conter a localização da pasta principal
-        File dir = new File(System.getProperty("user.dir") + "/AN/");
-
+    public static void printCollectedFiles(File dir) throws IOException {
         // Instância uma nova lista de ficheiros que irá conter todos os ficheiros da pasta principal e da sub-pasta
         ArrayList<File> list = collectFiles(dir);
 
@@ -198,7 +210,9 @@ public class MainM2 {
         if(!list.isEmpty()) {
             // Passa por cada ficheiro da lista
             for (File file : list) {
-                out.println(file.getAbsolutePath());
+                // Guarda o falor do path do ficheiro numa variavel
+                String filePath = file.getPath();
+                out.println(filePath.substring(filePath.indexOf("\\" + dir.getName())));
             }
         }
     }
