@@ -80,14 +80,11 @@ public class Aluno {
                 // Guarda a linha numa string
                 String line = scanner.nextLine();
 
-                // Separa o numero do aluno da string com o conteudo da linha
-                String numero = line.substring(0, line.indexOf(" "));
-
-                // Separa o nome do aluno da string com o conteudo da linha
-                String nome = line.substring(line.indexOf(" ") + 1);
+                // Divide a linha em varios items, para termos uma string com o numero e outra com o nome
+                String items[] = line.split(" ", 2);
 
                 //  Instância um novo aluno e adiciona-o á lista
-                alunos.add(new Aluno(Integer.parseInt(numero), nome));
+                alunos.add(new Aluno(Integer.parseInt(items[0]), items[1]));
             }
 
             // Fecha o scanner que está a ler o ficheiro

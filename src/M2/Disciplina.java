@@ -469,18 +469,15 @@ public class Disciplina {
 
                 // Verifica se o ficheiro tem mais do que 2 linhas e se a lista de inscrições tem valores
                 if(lineIndex > 1 && !inscricoes.isEmpty()) {
-                    // Separa o numero do aluno da string com o conteudo da linha
-                    String numero = line.substring(0, line.indexOf(" "));
-
-                    // Separa o nome do aluno da string com o conteudo da linha
-                    String nota = line.substring(line.indexOf(" ") + 1);
+                    // Divide a linha em varios items, para termos uma string com o numero e outra com a nota
+                    String items[] = line.split(" ", 2);
 
                     // Percorre cada inscrição
                     for (Inscricao inscricao : inscricoes) {
                         // Verifica se o numero do aluno está no ficheiro e se tem nota
-                        if(inscricao.getAluno().getNumero() == Integer.parseInt(numero) && !nota.equals("NA")) {
+                        if(inscricao.getAluno().getNumero() == Integer.parseInt(items[0]) && !items[1].equals("NA")) {
                             // Define a nota do aluno a partir da nota que está no ficheiro
-                            inscricao.setNota(Integer.valueOf(nota));
+                            inscricao.setNota(Integer.parseInt(items[1]));
                         }
                     }
                 }
