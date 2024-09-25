@@ -1,7 +1,12 @@
 package src.M2;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.lang.System.err;
 import static java.lang.System.out;
 
 public class MainM2 {
@@ -44,10 +49,10 @@ public class MainM2 {
         // Dados Discilina
         disciplina.dadosDisciplina();
 
-        out.println("TESTE 2:");
+        /**out.println("TESTE 2:");
 
         // Lê a lista alunos de um ficheiro e escreve os dados na consola
-        //dadosAlunos();
+        dadosAlunos();
 
         Disciplina disciplina2 = Disciplina.criarDisciplinaAutoInscricao("Programação Orientada a Objetos", 10);
 
@@ -73,7 +78,22 @@ public class MainM2 {
         Disciplina disciplina3 = Disciplina.criarDisciplina2Ficheiros();
 
         // Dados Discilina
-        disciplina3.dadosDisciplina();
+        disciplina3.dadosDisciplina();**/
+
+        out.println("TESTE 4:");
+
+        // Chama a função que imprime na consola os ficheiros de uma pasta
+        printCollectFilesDir(new File(System.getProperty("user.dir") + "/AN/"));
+
+        out.println(" ");
+        out.println("TESTE 5:");
+
+        // Chama a função que preenche uma lista com os ficheiros de uma pasta e com os ficheiros das sub-pastas
+        try {
+            printCollectedFiles();
+        } catch (IOException e) {
+            err.println("Ocorreu um erro!");
+        }
     }
 
     // Imprime os dados dos alunos presentes no ficheiro
@@ -86,6 +106,100 @@ public class MainM2 {
         // Percorre cada aluno da lista
         for (Aluno aluno : alunos) {
             out.println("- Aluno: Nº " + aluno.getNumero() + " | Nome: " + aluno.getNome());
+        }
+    }
+
+    /**
+     * Coleta os ficheiros de uma pasta e imprime-os na consola
+     * @param dir
+     */
+    public static void printCollectFilesDir(File dir) {
+        try {
+            // Cria um filtro para os ficheiros para que apenas devolva os ficheiros e não as pastas
+            FileFilter fileFilter = new FileFilter() {
+                public boolean accept(File file) {
+                    return file.isFile();
+                }
+            };
+
+            out.println("java ListFiles " + dir.getName());
+
+            // Cria um array com os ficheiros presentes no diretorio
+            File[] files = dir.listFiles(fileFilter);
+
+            // Verifica se existem ficheiros na pasta
+            if(files != null) {
+                // Passa por cada ficheiro
+                for (File file : files) {
+                    out.println(file.getPath());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Ocorreu um erro!");
+        }
+    }
+
+    /**
+     * Coleta os ficheiros de cada pasta recursivamente
+     * @param dir
+     * @param list
+     */
+    private static void collectFilesRec(File dir, ArrayList<File> list) {
+        try {
+            // Instância um array com os ficheiros presentes no diretorio
+            File[] files = dir.listFiles();
+
+            // Verifica se existem ficheiros na pasta
+            if(files != null) {
+                // Passa por cada ficheiro
+                for (File file : files) {
+                    // Adiciona o ficheiro à lista de ficheiros
+                    list.add(file);
+
+                    // Volta a chamar a função de forma recursiva
+                    collectFilesRec(file, list);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Ocorreu um erro!");
+        }
+    }
+
+    /**
+     * Coleta os ficheiros e as subs-pastas com os respetivos ficheiros de uma pasta
+     * @param dir
+     * @return
+     */
+    public static ArrayList<File> collectFiles(File dir) {
+        // Instância a lista que vai conter os ficheiros
+        ArrayList<File> list = new ArrayList<>();
+
+        try {
+            // Chama a função que irá preencher a lista com os ficheiros do diretorio principal e dos subdiretorios
+            collectFilesRec(dir, list);
+        } catch (Exception e) {
+            System.err.println("Ocorreu um erro!");
+        }
+
+        // Retorna a lista de ficheiros
+        return list;
+    }
+
+    public static void printCollectedFiles() throws IOException {
+        // Instância um novo File que irá conter a localização da pasta principal
+        File dir = new File(System.getProperty("user.dir") + "/AN/");
+
+        // Instância uma nova lista de ficheiros que irá conter todos os ficheiros da pasta principal e da sub-pasta
+        ArrayList<File> list = collectFiles(dir);
+
+        out.println("java ListFiles -r " + dir.getName());
+
+        // Verifica se a lista está vazia
+        if(!list.isEmpty()) {
+            // Passa por cada ficheiro da lista
+            for (File file : list) {
+                out.println(file.getAbsolutePath());
+            }
         }
     }
 }
