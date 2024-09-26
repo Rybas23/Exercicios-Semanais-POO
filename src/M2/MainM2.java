@@ -2,7 +2,6 @@ package src.M2;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,7 +30,7 @@ public class MainM2 {
         disciplina.inscrever(a5);
 
         // Desinscrever 1 aluno
-        disciplina.desinscrever(a4);
+        disciplina.desinscrever(a4.getNumero());
 
         // Lançar 2 notas
         disciplina.lancarNota(18, a1.getNumero());

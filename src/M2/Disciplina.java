@@ -79,57 +79,6 @@ public class Disciplina {
     }
 
     /**
-     * Método auxiliar para procurar o aluno desejado na lista de Inscrições
-     * @param aluno
-     * @return
-     */
-    private int getAlunoInscricoes(Aluno aluno) {
-        try {
-            // Instância uma variavel auxiliar para guardar o index da inscrição
-            int index = 0;
-
-            // Percorre a lista de inscrições
-            for (Inscricao inscricao : inscricoes) {
-                // Verifica se o aluno existe neste index da lista
-                if (inscricao.getAluno().equals(aluno)) {
-                    // retorna o aluno encontrado
-                    return index;
-                }
-
-                // Incrementa +1 no index de inscrições
-                index++;
-            }
-        } catch (Exception e) {
-            System.err.println("Ocorreu um erro!");
-        }
-
-        // Retorna -1 (inscrição não encontrada)
-        return -1;
-    }
-
-    /**
-     * Desinscreve um aluno da Disciplina
-     * @param aluno
-     */
-    public void desinscrever(Aluno aluno) {
-        try {
-            // Valida se existem inscrições e se o aluno está inscrito
-            if(!this.inscricoes.isEmpty()) {
-                // Recebe o index da inscrição do aluno
-                int index = getAlunoInscricoes(aluno);
-
-                // Valida se o index é maior de -1, ou seja, se existe
-                if(index > -1) {
-                    // Remove a inscrição do aluno
-                    this.inscricoes.remove(index);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Ocorreu um erro!");
-        }
-    }
-
-    /**
      * Método auxiliar para procurar o aluno desejado na lista de Inscrições a partir do seu numero
      * @param numeroAluno
      * @return
@@ -156,6 +105,28 @@ public class Disciplina {
 
         // Retorna -1 (inscrição não encontrada)
         return -1;
+    }
+
+    /**
+     * Desinscreve um aluno da Disciplina
+     * @param numeroAluno
+     */
+    public void desinscrever(int numeroAluno) {
+        try {
+            // Valida se existem inscrições e se o aluno está inscrito
+            if(!this.inscricoes.isEmpty()) {
+                // Recebe o index da inscrição do aluno
+                int index = getAlunoInscricoesByNumber(numeroAluno);
+
+                // Valida se o index é maior de -1, ou seja, se existe
+                if(index > -1) {
+                    // Remove a inscrição do aluno
+                    this.inscricoes.remove(index);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Ocorreu um erro!");
+        }
     }
 
     /**
