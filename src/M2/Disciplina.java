@@ -12,6 +12,7 @@ import static java.lang.System.out;
 public class Disciplina {
     //region Atributos
 
+    private String nome;
     private String sigla;
     private int capacidade;
     private ArrayList<Inscricao> inscricoes;
@@ -22,23 +23,25 @@ public class Disciplina {
 
     /**
      * Construtor sem inscrições
-     * @param sigla
+     * @param nome
      * @param capacidade
      */
-    public Disciplina(String sigla, int capacidade) {
-        this.sigla = sigla;
+    public Disciplina(String nome, int capacidade) {
+        this.nome = nome;
+        this.sigla = determinarSigla(nome);
         this.capacidade = capacidade;
         this.inscricoes = new ArrayList<>();
     }
 
     /**
      * Construtor Completo
-     * @param sigla
+     * @param nome
      * @param capacidade
      * @param inscricoes
      */
-    public Disciplina(String sigla, int capacidade, ArrayList<Inscricao> inscricoes) {
-        this.sigla = sigla;
+    public Disciplina(String nome, int capacidade, ArrayList<Inscricao> inscricoes) {
+        this.nome = nome;
+        this.sigla = determinarSigla(nome);
         this.capacidade = capacidade;
         this.inscricoes = inscricoes;
     }
@@ -276,7 +279,7 @@ public class Disciplina {
         try {
             out.println("Disciplina:");
             out.println(" ");
-            out.println("Sigla: " + this.sigla);
+            out.println("Nome: " + this.nome);
             out.println("Capacidade: " + this.capacidade);
             out.println(" ");
             out.println("Inscrições: ");
@@ -315,26 +318,6 @@ public class Disciplina {
     }
 
     /**
-     * Determina a Sigla da Disciplina a partir do seu nome
-     * @param nomeDisciplina
-     * @return
-     */
-    private static String determinarSigla(String nomeDisciplina) {
-        switch (nomeDisciplina) {
-            case "Bases de Dados":
-                return "BD";
-            case "Probabilidades e Processos Estocásticos":
-                return "PPE";
-            case "Teoria da Computação":
-                return "TC";
-            case "Tópicos de Matemática para Computação":
-                return "TMC";
-            default:
-                return "POO";
-        }
-    }
-
-    /**
      * Auto inscreve os alunos do ficheiro na disciplina
      * @return
      */
@@ -360,6 +343,27 @@ public class Disciplina {
     }
 
     /**
+     * Determina a Sigla a partir do nome
+     * @param nome
+     */
+    private static String determinarSigla(String nome) {
+        // Instancia uma string para guardar a sigla
+        String sigla = "";
+
+        // Percorre cada palavra do array com as palavras da string
+        for (String palavra : nome.split(" ")) {
+            // Verifica se a letra esta em Uppercase
+            if(Character.isUpperCase(palavra.charAt(0))) {
+                // Adiciona a primeira letra de cada palavra à string
+                sigla += palavra.charAt(0);
+            }
+        }
+
+        // Retorna a sigla
+        return sigla;
+    }
+
+    /**
      * Cria uma Disciplina com os alunos ja inscritos
      * @param nomeDisciplina
      * @param capacidade
@@ -367,7 +371,7 @@ public class Disciplina {
     public static Disciplina criarDisciplinaAutoInscricao(String nomeDisciplina, int capacidade) {
         try {
             // Cria e retorna a disciplina
-            return new Disciplina(determinarSigla(nomeDisciplina), capacidade, autoInscreverAlunos());
+            return new Disciplina(nomeDisciplina, capacidade, autoInscreverAlunos());
         } catch (Exception e) {
             System.err.println("Ocorreu um erro!");
 
@@ -377,33 +381,13 @@ public class Disciplina {
     }
 
     /**
-     * Determina a Nome da Disciplina a partir da sigla
-     * @param siglaDisciplina
-     * @return
-     */
-    private static String determinarNome(String siglaDisciplina) {
-        switch (siglaDisciplina) {
-            case "BDs":
-                return "Bases de Dado";
-            case "PPE":
-                return "Probabilidades e Processos Estocásticos";
-            case "TC":
-                return "Teoria da Computação";
-            case "TMC":
-                return "Tópicos de Matemática para Computação";
-            default:
-                return "Programação Orientada a Objetos";
-        }
-    }
-
-    /**
      * Lê o ficheiro que o utilizador escolher e escreve o seu conteudo, neste caso os varios alunos, na lista alunos
      * @return
      */
     private static Disciplina lerDisciplinaFicheiro(ArrayList<Inscricao> inscricoes) {
         try {
-            // Instância uma nova String que irá guardar a sigla da Disciplina
-            String siglaDisciplina = "";
+            // Instância uma nova String que irá guardar o nome da Disciplina
+            String nomeDisciplina = "";
 
             // Insatância um novo int que irá guardar o valor da capacidade
             int capacidade = 0;
@@ -433,7 +417,7 @@ public class Disciplina {
                 String line = scanner.nextLine();
 
                 if(lineIndex == 0) {
-                    siglaDisciplina = determinarSigla(line);
+                    nomeDisciplina = line;
                 } else if (lineIndex == 1) {
                     capacidade = Integer.parseInt(line);
                 }
@@ -458,7 +442,7 @@ public class Disciplina {
             }
 
             // Instância uma nova disciplina a partir dos dados obtidos do ficheiro
-            Disciplina disciplina = new Disciplina(siglaDisciplina, capacidade, inscricoes);
+            Disciplina disciplina = new Disciplina(nomeDisciplina, capacidade, inscricoes);
 
             // Fecha o scanner que está a ler o ficheiro
             scanner.close();
@@ -491,7 +475,7 @@ public class Disciplina {
             PrintWriter writer = new PrintWriter(file);
 
             // Escreve o nome da Disciplina no ficheiro
-            writer.println(determinarNome(this.sigla));
+            writer.println(this.nome);
 
             // Escreve a Capacidade da Disciplina no ficheiro
             writer.println(this.capacidade);

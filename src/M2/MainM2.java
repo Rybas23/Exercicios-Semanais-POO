@@ -20,7 +20,7 @@ public class MainM2 {
         Aluno a5 = new Aluno("Aluno 5");
 
         // Cria 1 Disciplina
-        Disciplina disciplina = new Disciplina("POO", 20);
+        Disciplina disciplina = new Disciplina("Programação Orientada a Objetos", 20);
 
         // Inscrever os 5 alunos
         disciplina.inscrever(a1);
