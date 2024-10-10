@@ -17,7 +17,7 @@ public class Disciplina {
     private int capacidade;
     private ArrayList<Inscricao> inscricoes;
 
-    //endegion
+    //endregion
 
     //region Construtores
 

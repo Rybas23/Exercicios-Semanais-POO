@@ -6,7 +6,7 @@ public class Inscricao implements Comparable<Inscricao> {
     private int nota;
     private Aluno aluno;
 
-    //endegion
+    //endregion
 
     //region Construtores
 
@@ -48,7 +48,7 @@ public class Inscricao implements Comparable<Inscricao> {
         return this.nota != Settings.semNota;
     }
 
-    //endegion
+    //endregion
 
     //region Comparator
 
