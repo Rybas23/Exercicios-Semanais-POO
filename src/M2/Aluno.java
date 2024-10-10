@@ -50,6 +50,11 @@ public class Aluno {
 
     //region Métodos
 
+    @Override
+    public String toString() {
+        return "Aluno {numero = " + numero + ", nome = " + nome + '}';
+    }
+
     /**
      * Lê o ficheiro que o utilizador escolher e escreve o seu conteudo, neste caso os varios alunos, na lista alunos
      * @return
