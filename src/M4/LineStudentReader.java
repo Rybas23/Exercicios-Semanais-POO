@@ -19,7 +19,7 @@ public class LineStudentReader extends LineObjectReader<Aluno>{
     @Override
     public Aluno lineToObject(String line) {
         // Divide a linha em varios items, para termos uma string com o numero e outra com o nome
-        String parts[] = line.split(" ", 2);
+        String[] parts = line.split(" ", 2);
 
         //O construtor do Aluno é {numero (int), nome (string)}
         return new Aluno(Integer.parseInt(parts[0]), parts[1]);
