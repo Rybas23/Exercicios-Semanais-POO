@@ -68,7 +68,7 @@ public class MainM3 {
         alunos.sort(new Aluno.AlunoComparatorAnoNascimento());
 
         System.out.println("");
-        System.out.println("Lista Ordenada por Ano de Nascimeento:");
+        System.out.println("Lista Ordenada por Ano de Nascimento:");
         for(Aluno aluno : alunos) {
             System.out.println(aluno);
         }

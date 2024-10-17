@@ -51,6 +51,21 @@ public class Aluno {
 
     //endregion
 
+    //region Métodos
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "numero=" + numero +
+                ", nome='" + nome + '\'' +
+                ", anoMatricula=" + anoMatricula +
+                ", anoNascimento=" + anoNascimento +
+                '}';
+    }
+
+
+    //endregion
+
     //region Comparadores
 
     /**
