@@ -84,7 +84,6 @@ public class Interval implements Iterable<Integer>{
             }
 
             return currentValue++;
-
         }
 
         @Override

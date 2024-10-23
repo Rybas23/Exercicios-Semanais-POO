@@ -75,9 +75,54 @@ public class MainM6 {
         listIntegers.add(1);
         listIntegers.add(2);
 
-        Iterable<String> matchesNumbers = select2(listStrings, listIntegers); // {"a","b"}
+        Iterable<String> stringMatchesNumber = select2(listStrings, s -> s.contains("2"));
+        stringMatchesNumber.forEach(System.out::println);
 
-        nonEmpty.forEach(System.out::println);
+        Iterable<Integer> matchesNumber = select2(listIntegers, n -> (n == 2));
+        matchesNumber.forEach(System.out::println);
+
+        //endregion
+
+        //region 6.6
+        System.out.println("\n6.6\n");
+
+        String[] stringArray = new String[5];
+        stringArray[0] = "A";
+        stringArray[1] = "B";
+        stringArray[2] = "C";
+        stringArray[3] = "D";
+        stringArray[4] = "E";
+
+        ArrayIterator stringIterator = new ArrayIterator(stringArray);
+
+        while(stringIterator.hasNext()) {
+            System.out.println(stringIterator.next());
+        }
+
+        Integer[] intArray = new Integer[5];
+        intArray[0] = 1;
+        intArray[1] = 2;
+        intArray[2] = 3;
+        intArray[3] = 4;
+        intArray[4] = 5;
+
+        System.out.println("");
+
+        ArrayIterator intIterator = new ArrayIterator(intArray);
+
+        while(intIterator.hasNext()) {
+            System.out.println(intIterator.next());
+        }
+
+        //endregion
+
+        //region 6.7
+        System.out.println("\n6.7\n");
+
+        Week week = new Week();
+        for(WeekDay w: week) {
+            System.out.println(w);
+        }
 
         //endregion
     }
@@ -145,42 +190,23 @@ public class MainM6 {
      * @param <T>
      */
     static <T> Iterable<T> select2(Iterable<T> it, Predicate<T> pred) {
-        return () -> new Iterator<T>() {
-            Iterator<T> sourceIterator = it.iterator();
-            T current;
-            boolean hasCurrent;
+        if(it == null || pred == null) {
+            throw new NullPointerException("iterable or predicate is null");
+        }
 
-            @Override
-            public boolean hasNext() {
-                while(!hasCurrent) {
-                    if(!sourceIterator.hasNext()) {
-                        return false;
-                    }
+        try {
+            ArrayList<T> result = new ArrayList<>();
 
-                    T next = sourceIterator.next();
-
-                    if(pred.test(next)) {
-                        current = next;
-                        hasCurrent = true;
-                    }
+            for (T t : it) {
+                if (pred.test(t)) {
+                    result.add(t);
                 }
-
-                return true;
             }
 
-            @Override
-            public T next() {
-                if(!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-
-                T next = current;
-                current = null;
-                hasCurrent = false;
-
-                return next;
-            }
-        };
+            return result;
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+            return null;
+        }
     }
-
 }
