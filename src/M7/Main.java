@@ -30,7 +30,10 @@ public class Main {
         deck.addCard(c9);
         deck.addCard(c10);
 
-        System.out.println(deck);
+        CardDeck sueca = CardDeck.filteredDeck(c -> c.getRank().belongsTo40cardsDeck());
+        sueca.shuffle();
+        System.out.println(sueca);
+        System.out.println(sueca.totalCards());
 
     }
 
