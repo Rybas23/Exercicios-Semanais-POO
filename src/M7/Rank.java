@@ -24,9 +24,4 @@ public enum Rank {
         return 0;
     }
 
-    private static Rank teste(Object ... elements){
-
-    }
-
-
 }
