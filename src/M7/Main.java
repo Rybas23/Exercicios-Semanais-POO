@@ -18,8 +18,6 @@ public class Main {
         Card c9 = Card.getCard(Suit.CLUBS, Rank.SIX);
         Card c10 = Card.getCard(Suit.SPADES, Rank.KING);
 
-//        List<Card> d = new ArrayList<Card>();
-
         CardDeck deck = CardDeck.empty();
         deck.addCard(c1);
         deck.addCard(c2);

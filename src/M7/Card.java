@@ -46,6 +46,6 @@ public final class Card {
 
     @Override
     public String toString() {
-        return rank + " de " + suit;
+        return rank + " of " + suit;
     }
 }
