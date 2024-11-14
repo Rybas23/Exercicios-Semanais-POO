@@ -1,9 +1,6 @@
 package src.M7;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class CardDeck implements Iterable<Card> {
@@ -65,5 +62,9 @@ public class CardDeck implements Iterable<Card> {
         for (Card card : cards)
             aux += card.toString() + "\n";
         return aux;
+    }
+
+    public void sort(Comparator<Card> c) {
+        cards.sort(c);
     }
 }
