@@ -1,9 +1,6 @@
 package src.M7;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
+public class MainM7 {
 
     public static void main(String[] args) {
 
@@ -32,10 +29,21 @@ public class Main {
 
         CardDeck sueca = CardDeck.filteredDeck(c -> c.getRank().belongsTo40cardsDeck());
         sueca.shuffle();
-        System.out.println(sueca);
-        System.out.println(sueca.totalCards());
+        System.out.println(sueca + "\n");
+        System.out.println(sueca.totalCards() + "\n");
+
+        System.out.println("Sort By Suit:");
+        sueca.sort(CardSortingStrategy.BY_SUIT);
+        System.out.println(sueca + "\n");
+
+        System.out.println("Sort By Rank:");
+        sueca.sort(CardSortingStrategy.BY_RANK);
+        System.out.println(sueca + "\n");
+
+        sueca.shuffle();
+        System.out.println("Sort By Suit and Rank:");
+        sueca.sort(CardSortingStrategy.BY_SUIT_AND_THEN_RANK);
+        System.out.println(sueca + "\n");
 
     }
-
-
 }
