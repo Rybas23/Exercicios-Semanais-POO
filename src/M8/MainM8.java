@@ -21,7 +21,7 @@ public class MainM8 {
         timeList.add(time3);
         timeList.add(time4);
 
-        System.out.println("\nLista Desordenada");
+        System.out.println("Lista Desordenada");
         for (Time time : timeList) {
             System.out.println(time);
         }
