@@ -1,6 +1,6 @@
 package src.M5.AiTunas;
 
-public final class Time {
+public final class Time implements Comparable<Time>{
     //region Atributos
 
     private final int totalSeconds;
@@ -79,6 +79,11 @@ public final class Time {
 
     public boolean isGreaterThan(Time t) {
         return totalSeconds > t.getTotalSeconds();
+    }
+
+    @Override
+    public int compareTo(Time o) {
+        return Integer.compare(totalSeconds, o.getTotalSeconds());
     }
 
     //endregion
