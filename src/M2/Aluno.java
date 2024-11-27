@@ -17,6 +17,7 @@ public class Aluno {
 
     /**
      * Construtor Completo alternativo
+     *
      * @param numero
      * @param nome
      */
@@ -27,6 +28,7 @@ public class Aluno {
 
     /**
      * Construtor Completo
+     *
      * @param nome
      */
     public Aluno(String nome) {
@@ -57,6 +59,7 @@ public class Aluno {
 
     /**
      * Lê o ficheiro que o utilizador escolher e escreve o seu conteudo, neste caso os varios alunos, na lista alunos
+     *
      * @return
      */
     public static ArrayList<Aluno> lerAlunoFicheiro() {
@@ -65,7 +68,7 @@ public class Aluno {
             ArrayList<Aluno> alunos = new ArrayList<Aluno>();
 
             // Instância o dialog que vai ser utilizado para escolher o ficheiro
-            FileDialog dialog = new FileDialog((Frame)null, "Selecione o ficheiro dos alunos");
+            FileDialog dialog = new FileDialog((Frame) null, "Selecione o ficheiro dos alunos");
 
             // Define propriedades do dialog, neste caso o modo de load e a visibilidade
             dialog.setMode(FileDialog.LOAD);
@@ -81,7 +84,7 @@ public class Aluno {
             Scanner scanner = new Scanner(file);
 
             // Lê as linhas do ficheiro enquanto existirem
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 // Guarda a linha numa string
                 String line = scanner.nextLine();
 

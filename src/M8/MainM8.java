@@ -4,8 +4,6 @@ import src.M3.StringsToText;
 
 import java.util.*;
 
-import static src.M1.MainM1.expressionEvaluator;
-
 public class MainM8 {
     public static void main(String[] args) {
         //region 8.1
@@ -49,60 +47,26 @@ public class MainM8 {
         //region 8.2
         System.out.println("\n8.2\n");
 
-        Aluno a1 = new Aluno("TT", 1);
-        Aluno a2 = new Aluno("TT", 2);
-        Aluno a3 = new Aluno("TT", 3);
-        Aluno a4 = new Aluno("TT", 4);
-        Aluno a5 = new Aluno("TT", 5);
+        Aluno a1 = new Aluno("Ana", 1);
+        Aluno a2 = new Aluno("Luís", 2);
+        Aluno a3 = new Aluno("Rui", 3);
+        Aluno a4 = new Aluno("Rita", 4);
+        Aluno a5 = new Aluno("Maria", 5);
 
         HorarioDuvidas horarioDuvidas = new HorarioDuvidas();
+        horarioDuvidas.marcacao(a1);
         horarioDuvidas.marcacao(a3);
-        horarioDuvidas.marcacao(a4);
 
-        horarioDuvidas.chegada(a5);
-        horarioDuvidas.chegada(a2);
-        horarioDuvidas.chegada(a3);
-        horarioDuvidas.chegada(a1);
         horarioDuvidas.chegada(a4);
+        horarioDuvidas.chegada(a3);
+        horarioDuvidas.chegada(a2);
+        horarioDuvidas.chegada(a5);
+        horarioDuvidas.chegada(a1);
 
-        System.out.print("Marcações: ");
-        int i = 0;
-        for (Aluno aluno : horarioDuvidas.getMarcacoes()) {
-            if (i == horarioDuvidas.getMarcacoes().size() - 1) {
-                System.out.print(aluno);
-            } else {
-                System.out.print(aluno + ", ");
-            }
-
-            i++;
-        }
-
-        System.out.println("\n");
-
-        System.out.print("Chegadas: ");
-        i = 0;
-        for (Aluno aluno : horarioDuvidas.getChegadas()) {
-            if (i == horarioDuvidas.getChegadas().size() - 1) {
-                System.out.print(aluno);
-            } else {
-                System.out.print(aluno + ", ");
-            }
-
-            i++;
-        }
-
-        System.out.println("\n");
-
-        System.out.print("Atendimento: ");
-        i = 0;
-        for (Aluno aluno : horarioDuvidas) {
-            if (i == horarioDuvidas.getPq().size() - 1) {
-                System.out.print(horarioDuvidas.proximo());
-            } else {
-                System.out.print(horarioDuvidas.proximo() + ", ");
-            }
-
-            i++;
+        Aluno proxAluno = horarioDuvidas.proximo();
+        while(proxAluno != null){
+            System.out.println(proxAluno);
+            proxAluno = horarioDuvidas.proximo();
         }
 
         //endregion
