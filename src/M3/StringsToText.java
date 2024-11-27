@@ -1,5 +1,7 @@
 package src.M3;
 
+import src.M8.ArrayStack;
+
 import java.util.List;
 
 /**
@@ -12,8 +14,13 @@ public class StringsToText {
      * @param sep
      * @return
      */
-   public static String separatedBy(List<String> strings, String sep ) {
+    public static String separatedBy(List<String> strings, String sep ) {
        // Retorna a String com todas as strings da lista juntas e separadas por um separador
        return String.join(sep, strings);
+    }
+
+    public static String separatedBy2(ArrayStack<String> strings, String sep ) {
+        // Retorna a String com todas as strings da lista juntas e separadas por um separador
+        return String.join(sep, strings);
     }
 }

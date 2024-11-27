@@ -1,6 +1,10 @@
 package src.M8;
 
+import src.M3.StringsToText;
+
 import java.util.*;
+
+import static src.M1.MainM1.expressionEvaluator;
 
 public class MainM8 {
     public static void main(String[] args) {
@@ -163,6 +167,32 @@ public class MainM8 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //endregion
+
+        //region 8.8
+        System.out.println("\n8.8\n");
+
+        ArrayStack<String> arrayStack = new ArrayStack<>();
+        arrayStack.push("1");
+        arrayStack.push("2");
+        arrayStack.push("3");
+        arrayStack.push("4");
+        arrayStack.push("5");
+
+        System.out.println("Stack:");
+        arrayStack.forEach(System.out::println);
+
+        System.out.println("\nStack size: " + arrayStack.size());
+        System.out.println("Stack isEmpty: " + arrayStack.isEmpty());
+        System.out.println("Stack pop: " + arrayStack.pop());
+        System.out.println("Stack peek: " + arrayStack.peek() + "\n");
+
+        System.out.println("Stack after pop:");
+        arrayStack.forEach(System.out::println);
+
+        String text = StringsToText.separatedBy2(arrayStack, ", ");
+        System.out.println("\n" + text);
 
         //endregion
     }
